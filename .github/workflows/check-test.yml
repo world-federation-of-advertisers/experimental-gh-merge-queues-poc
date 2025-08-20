@@ -1,0 +1,26 @@
+name: Check test
+
+on:
+  pull_request:
+    branches:
+      - main
+      - 'releases/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  first-check:
+    name: First check
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Dummy step out revision
+      run: echo "OK"
+
+  second-check:
+    name: Second check
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Dummy step out revision
+      run: echo "OK"
