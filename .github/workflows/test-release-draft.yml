@@ -24,5 +24,7 @@ jobs:
           NEW_RELEASE_TAG: "v0.0.1-test"
         run: >
           gh release create --draft
+          --generate-notes          
+          --notes "Just a test note"
           --target "${RELEASE_TARGET}"
           "${NEW_RELEASE_TAG}"
