@@ -1,0 +1,28 @@
+name: Test Draft new release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-target:
+        type: string
+        required: true
+jobs:
+  draft-release:
+    name: Draft new release
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+      
+      - name: Draft release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TARGET: ${{ inputs.release-target }}
+          NEW_RELEASE_TAG: "v0.0.1-test"
+        run: >
+          gh release create --draft
+          --target "${RELEASE_TARGET}"
+          "${NEW_RELEASE_TAG}"
